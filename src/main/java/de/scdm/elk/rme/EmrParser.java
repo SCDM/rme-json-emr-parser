@@ -2,7 +2,6 @@ package de.scdm.elk.rme;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
@@ -37,12 +36,6 @@ public class EmrParser {
               return new WmDataParsingService().call(line);
             }
           });
-
-      final List<String> foundValuations = lines.collect();
-
-      for (final String jsonData : foundValuations) {
-        System.out.println(jsonData);
-      }
 
       // Write back JSON to S3
       lines.saveAsTextFile(
