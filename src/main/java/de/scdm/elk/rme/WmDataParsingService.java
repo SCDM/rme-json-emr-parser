@@ -97,7 +97,7 @@ public class WmDataParsingService {
 
       return stringWoDates;
     } else {
-      return inputLine;
+      return "";
     }
   }
 

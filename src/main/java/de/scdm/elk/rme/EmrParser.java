@@ -39,7 +39,7 @@ public class EmrParser {
 
       // Write back JSON to S3
       lines.saveAsTextFile(
-          "s3n://wm-json-parser/hist_wm_data_nov-2016_result.csv");
+          "s3n://wm-json-parser/hist_wm_data_nov-2016_result_new.csv");
 
     } catch (final Exception e) {
       e.printStackTrace();

@@ -42,7 +42,7 @@ public class TestEMR {
         .withJar("command-runner.jar").withArgs("spark-submit", "--deploy-mode",
             "cluster", "--class", "de.scdm.elk.rme.EmrParser",
             Configuration.INSTANCE.getEMR_APPLICATION_PATH()
-                + "rme-json-emr-parser-jar-with-dependencies-0.2.jar");
+                + "rme-json-emr-parser-jar-with-dependencies-0.6.jar");
 
     final StepConfig sparkStep = new StepConfig()
         .withName("Spark Step Command Runner")
@@ -63,11 +63,11 @@ public class TestEMR {
     // final RunJobFlowResult result = emr.runJobFlow(request);
 
     final AddJobFlowStepsRequest request = new AddJobFlowStepsRequest();
-    request.withJobFlowId("j-3572XPON8XEUS");
+    request.withJobFlowId("j-2ZZWZ17WBEFH9");
     final List<StepConfig> stepConfigs = new ArrayList<StepConfig>();
     request.withSteps(sparkStep);
     AddJobFlowStepsResult addJobFlowSteps = emr.addJobFlowSteps(request);
-    System.out.println("Step attached to cluster ID: " + "j-3572XPON8XEUS");
+    System.out.println("Step attached to cluster ID: " + "j-2ZZWZ17WBEFH9");
 
     System.out.println(addJobFlowSteps.getStepIds());
 
