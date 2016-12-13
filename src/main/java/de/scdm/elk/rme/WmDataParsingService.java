@@ -44,30 +44,41 @@ public class WmDataParsingService {
       String stringWoId = stringWoDate.replaceAll(stringList.get(0), "\"\"");
       System.out.println(stringWoId);
 
+      for (String string : stringList) {
+        //System.out.println(string);
+        if (string.matches("\\d{2}.\\d{2}.\\d{2}")) {
+          //System.out.println(string);
+          stringWoId = stringWoId.replaceAll(string, parseDate(string));
+        }
+
+      }
+
       // Replace Date Fields
-      String stringWoDates = stringWoId
-          .replaceAll(stringList.get(2), parseDate(stringList.get(2))) // aoD
-          .replaceAll(stringList.get(9), parseDate(stringList.get(9))) // issue
-          .replaceAll(stringList.get(19), parseDate(stringList.get(19))) // lrd
-          .replaceAll(stringList.get(22), parseDate(stringList.get(22)))
-          .replaceAll(stringList.get(24), parseDate(stringList.get(24)))
-          .replaceAll(stringList.get(26), parseDate(stringList.get(26)))
-          .replaceAll(stringList.get(28), parseDate(stringList.get(28)))
-          .replaceAll(stringList.get(30), parseDate(stringList.get(30)))
-          .replaceAll(stringList.get(32), parseDate(stringList.get(32)))
-          .replaceAll(stringList.get(34), parseDate(stringList.get(34)))
-          .replaceAll(stringList.get(36), parseDate(stringList.get(36)))
-          .replaceAll(stringList.get(38), parseDate(stringList.get(38)))
-          .replaceAll(stringList.get(40), parseDate(stringList.get(40)))
-          .replaceAll(stringList.get(42), parseDate(stringList.get(42)))
-          .replaceAll(stringList.get(44), parseDate(stringList.get(44)))
-          .replaceAll(stringList.get(46), parseDate(stringList.get(46)))
-          .replaceAll(stringList.get(52), parseDate(stringList.get(52)))
-          .replaceAll(stringList.get(53), parseDate(stringList.get(53)))
-          .replaceAll(stringList.get(60), parseDate(stringList.get(60)))
-          .replaceAll(stringList.get(61), parseDate(stringList.get(61)))
-          .replaceAll(stringList.get(68), parseDate(stringList.get(68)))
-          .replaceAll(stringList.get(90), parseDate(stringList.get(90)));
+// String stringWoDates = stringWoId
+// .replaceAll(stringList.get(2), parseDate(stringList.get(2))) // aoD
+// .replaceAll(stringList.get(9), parseDate(stringList.get(9))) // issue
+// .replaceAll(stringList.get(19), parseDate(stringList.get(19))) // lrd
+// .replaceAll(stringList.get(22), parseDate(stringList.get(22)))
+// .replaceAll(stringList.get(24), parseDate(stringList.get(24)))
+// .replaceAll(stringList.get(26), parseDate(stringList.get(26)))
+// .replaceAll(stringList.get(28), parseDate(stringList.get(28)))
+// .replaceAll(stringList.get(30), parseDate(stringList.get(30)))
+// .replaceAll(stringList.get(32), parseDate(stringList.get(32)))
+// .replaceAll(stringList.get(34), parseDate(stringList.get(34)))
+// .replaceAll(stringList.get(36), parseDate(stringList.get(36)))
+// .replaceAll(stringList.get(38), parseDate(stringList.get(38)))
+// .replaceAll(stringList.get(40), parseDate(stringList.get(40)))
+// .replaceAll(stringList.get(42), parseDate(stringList.get(42)))
+// .replaceAll(stringList.get(44), parseDate(stringList.get(44)))
+// .replaceAll(stringList.get(46), parseDate(stringList.get(46)))
+// .replaceAll(stringList.get(52), parseDate(stringList.get(52)))
+// .replaceAll(stringList.get(53), parseDate(stringList.get(53)))
+// .replaceAll(stringList.get(60), parseDate(stringList.get(60)))
+// .replaceAll(stringList.get(61), parseDate(stringList.get(61)))
+// .replaceAll(stringList.get(68), parseDate(stringList.get(68)))
+// .replaceAll(stringList.get(90), parseDate(stringList.get(90)));
+
+      String stringWoDates = stringWoId;
 
       System.out.println("Result");
       System.out.println(stringWoDates);
@@ -146,12 +157,16 @@ public class WmDataParsingService {
 
   public String parseDate(String dateString) {
     if (!dateString.equals("\"\"")) {
-      DateTimeFormatter dtf = DateTimeFormat.forPattern("dd-MMM-yy");
-      DateTime jodaTime = dtf.parseDateTime(dateString);
-      DateTimeFormatter dtfOut = DateTimeFormat.forPattern("dd-MMM-yyyy");
-      String resultDate = dtfOut.print(jodaTime);
+      try {
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("dd.MM.yy");
+        DateTime jodaTime = dtf.parseDateTime(dateString);
+        DateTimeFormatter dtfOut = DateTimeFormat.forPattern("dd-MMM-yyyy");
+        String resultDate = dtfOut.print(jodaTime);
 
-      return resultDate;
+        return resultDate;
+      } catch (Exception e) {
+        return "\"\"";
+      }
     } else {
       return "\"\"";
     }
