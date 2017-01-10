@@ -21,8 +21,8 @@ public class EmrParser {
         "AKIAINCDE4F7YE2WQQUQ");
     jsc.hadoopConfiguration().set("fs.s3n.awsSecretAccessKey",
         "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");
-    JavaRDD<String> textFile = jsc
-        .textFile("s3n://wm-json-parser/2016-12-12/export_HISTORICAL_WM_DATA.csv");
+    JavaRDD<String> textFile = jsc.textFile(
+        "s3n://wm-json-parser/2016-12-12/export_HISTORICAL_WM_DATA.csv");
 
     try {
 
@@ -39,7 +39,7 @@ public class EmrParser {
 
       // Write back JSON to S3
       lines.saveAsTextFile(
-          "s3n://wm-json-parser/2016-12-12/export_HISTORICAL_WM_DATA_new.csv");
+          "s3n://wm-json-parser/2016-12-12/export_HISTORICAL_WM_DATA_new1.csv");
 
     } catch (final Exception e) {
       e.printStackTrace();

@@ -15,15 +15,16 @@ public class WmDataParsingService {
 
   public String call(final String inputLine) throws IOException {
     System.out.println("***************************");
-    System.out.println(inputLine);
+    // System.out.println(inputLine);
 
     if (inputLine.contains("{") && inputLine.contains("}")) {
       String stringWoJson = removeJson(inputLine);
       String stringWoPi = stringWoJson.replaceAll("-3.141592653589793", "\"\"");
       String stringWoPi2 = stringWoPi.replaceAll("-31415", "\"\"");
-      String stringWoDate = stringWoPi2.replaceAll("01-JAN-19", "\"\"");
+      String stringWoDate = stringWoPi2.replaceAll("01-JAN-19", "\"\"")
+          .replaceAll("01.01.19", "\"\"");
 
-      System.out.println(stringWoDate);
+      // System.out.println(stringWoDate);
 
       // Split string into fields for processing
       // final String[] field = stringWoDate
@@ -38,51 +39,51 @@ public class WmDataParsingService {
         // System.out.println("Found a " + m.group());
         stringList.add(m.group());
       }
-      System.out.println(stringList.size());
+      // System.out.println(stringList.size());
 
       // Replace id
       String stringWoId = stringWoDate.replaceAll(stringList.get(0), "\"\"");
-      System.out.println(stringWoId);
+      // System.out.println(stringWoId);
 
       for (String string : stringList) {
-        //System.out.println(string);
+        // System.out.println(string);
         if (string.matches("\\d{2}.\\d{2}.\\d{2}")) {
-          //System.out.println(string);
+          // System.out.println(string);
           stringWoId = stringWoId.replaceAll(string, parseDate(string));
         }
 
       }
 
       // Replace Date Fields
-// String stringWoDates = stringWoId
-// .replaceAll(stringList.get(2), parseDate(stringList.get(2))) // aoD
-// .replaceAll(stringList.get(9), parseDate(stringList.get(9))) // issue
-// .replaceAll(stringList.get(19), parseDate(stringList.get(19))) // lrd
-// .replaceAll(stringList.get(22), parseDate(stringList.get(22)))
-// .replaceAll(stringList.get(24), parseDate(stringList.get(24)))
-// .replaceAll(stringList.get(26), parseDate(stringList.get(26)))
-// .replaceAll(stringList.get(28), parseDate(stringList.get(28)))
-// .replaceAll(stringList.get(30), parseDate(stringList.get(30)))
-// .replaceAll(stringList.get(32), parseDate(stringList.get(32)))
-// .replaceAll(stringList.get(34), parseDate(stringList.get(34)))
-// .replaceAll(stringList.get(36), parseDate(stringList.get(36)))
-// .replaceAll(stringList.get(38), parseDate(stringList.get(38)))
-// .replaceAll(stringList.get(40), parseDate(stringList.get(40)))
-// .replaceAll(stringList.get(42), parseDate(stringList.get(42)))
-// .replaceAll(stringList.get(44), parseDate(stringList.get(44)))
-// .replaceAll(stringList.get(46), parseDate(stringList.get(46)))
-// .replaceAll(stringList.get(52), parseDate(stringList.get(52)))
-// .replaceAll(stringList.get(53), parseDate(stringList.get(53)))
-// .replaceAll(stringList.get(60), parseDate(stringList.get(60)))
-// .replaceAll(stringList.get(61), parseDate(stringList.get(61)))
-// .replaceAll(stringList.get(68), parseDate(stringList.get(68)))
-// .replaceAll(stringList.get(90), parseDate(stringList.get(90)));
+      // String stringWoDates = stringWoId
+      // .replaceAll(stringList.get(2), parseDate(stringList.get(2))) // aoD
+      // .replaceAll(stringList.get(9), parseDate(stringList.get(9))) // issue
+      // .replaceAll(stringList.get(19), parseDate(stringList.get(19))) // lrd
+      // .replaceAll(stringList.get(22), parseDate(stringList.get(22)))
+      // .replaceAll(stringList.get(24), parseDate(stringList.get(24)))
+      // .replaceAll(stringList.get(26), parseDate(stringList.get(26)))
+      // .replaceAll(stringList.get(28), parseDate(stringList.get(28)))
+      // .replaceAll(stringList.get(30), parseDate(stringList.get(30)))
+      // .replaceAll(stringList.get(32), parseDate(stringList.get(32)))
+      // .replaceAll(stringList.get(34), parseDate(stringList.get(34)))
+      // .replaceAll(stringList.get(36), parseDate(stringList.get(36)))
+      // .replaceAll(stringList.get(38), parseDate(stringList.get(38)))
+      // .replaceAll(stringList.get(40), parseDate(stringList.get(40)))
+      // .replaceAll(stringList.get(42), parseDate(stringList.get(42)))
+      // .replaceAll(stringList.get(44), parseDate(stringList.get(44)))
+      // .replaceAll(stringList.get(46), parseDate(stringList.get(46)))
+      // .replaceAll(stringList.get(52), parseDate(stringList.get(52)))
+      // .replaceAll(stringList.get(53), parseDate(stringList.get(53)))
+      // .replaceAll(stringList.get(60), parseDate(stringList.get(60)))
+      // .replaceAll(stringList.get(61), parseDate(stringList.get(61)))
+      // .replaceAll(stringList.get(68), parseDate(stringList.get(68)))
+      // .replaceAll(stringList.get(90), parseDate(stringList.get(90)));
 
       String stringWoDates = stringWoId;
 
-      System.out.println("Result");
-      System.out.println(stringWoDates);
-      System.out.println("Result end");
+      // System.out.println("Result");
+      // System.out.println(stringWoDates);
+      // System.out.println("Result end");
       // as of date
       // .replaceAll(field[9], parseDate(field[9])) // Issue Date
       // .replaceAll(field[19], parseDate(field[19])) // Last Redemption Date
