@@ -20,8 +20,8 @@ public class TestWMDelivery {
       // String readFileToString = FileUtils.readFileToString(new
       // File("/Users/hubertusbecker/Downloads/export_HISTORICAL_WM_DATA.csv"));
       List<String> readLines = FileUtils.readLines(
-          new File("/home/max/Downloads/export_HISTORICAL_WM_DATA.csv"),
-          "Windows-1252");
+          new File("/home/max/Downloads/2016-11-01_HISTORICAL_WM_DATA.csv"),
+          "UTF-8");
       for (String string : readLines) {
         // System.out.println(string);
 
